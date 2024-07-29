@@ -1,22 +1,22 @@
 <template>
     <div>
         <footer id="footer">
-            <p>Construído por Ana Luísa Caixeta &copy; 2024</p>
+            <p>Construido por Ana Luísa Caixeta &copy; 2024</p>
         </footer>
-    </div>
+    </div>    
 </template>
 
 <script>
-    export default{
-        name: "FooterComponent",
+    export default {
+        name: "FooterComponent"
     }
 </script>
 
 <style scoped>
     #footer {
         height: 80px;
-        background-color: #222;
-        color: orangered;
+        background-color: #333;
+        color: goldenrod;
         display: flex;
         align-items: center;
         justify-content: center;

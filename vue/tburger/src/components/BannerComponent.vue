@@ -1,4 +1,3 @@
-
 <template>
     <div id="main-banner">
         <h1>Hamburguer de churrasqueiro</h1>
@@ -6,7 +5,7 @@
 </template>
 
 <script>
-    export default{
+    export default {
         name: "BannerComponent"
     }
 </script>
@@ -22,7 +21,7 @@
         justify-content: flex-end;
     }
 
-    #main-banner h1{
+    #main-banner h1 {
         font-size: 40px;
         color: antiquewhite;
         text-align: center;

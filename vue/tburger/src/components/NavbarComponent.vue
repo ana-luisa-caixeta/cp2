@@ -2,17 +2,18 @@
     <div>
         <nav id="nav">
             <router-link to="/" id="logo-url">
-                <img :src="urlLogo" :alt="descImg" id="logo">
+                <img :src="urlLogo" :alt="descImg" id="logo"/>
             </router-link>
             <router-link to="/menu">Menu</router-link>
+            <router-link to="/config-pedido">Config</router-link>
             <router-link to="/pedidos">Pedidos</router-link>
         </nav>
-    </div>
+    </div>    
 </template>
 
 <script>
     export default {
-        name: "NavbarComponent",
+        name : "NavbarComponent",
         props: {
             urlLogo : String,
             descImg : String
@@ -22,8 +23,8 @@
 
 <style scoped>
     #nav {
-        background-color: #222;
-        border-bottom: 3px solid orangered;
+        background-color: #333;
+        border-bottom: 3px solid darkgoldenrod;
         padding: 15px 50px;
         display: flex;
         justify-content: flex-end;
@@ -41,15 +42,14 @@
     }
 
     #nav a {
-        color: orangered;
+        color: darkgoldenrod;
         text-decoration: none;
         margin: 12px;
         transition: .5s;
-
     }
 
-    #nav a:hover{
-        color: orange;
+    #nav a:hover {
+        color: antiquewhite;
         font-size: 20px;
     }
 </style>
