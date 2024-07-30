@@ -15,6 +15,7 @@
                     </div>
                 </div>
             </div>
+            <router-link to="/config-pedido">config</router-link>
         </div>
         <PedidoComponent 
             v-if="nomeHamburgerEscolhido && fotoHamburgerEscolhido"

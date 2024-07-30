@@ -22,7 +22,7 @@
                     id="ponto-carne"
                     name="ponto-carne"
                     v-model="pontoCarneSelecionado">
-                    <option value="" selected>Selecione o ponto</option>
+                    <option value="" selected>Selecione o ponto</option>]
                     <option v-for="pontoCarne in listaPontoCarne" 
                     :key="pontoCarne.id" 
                     :value="pontoCarne">{{ pontoCarne.descricao }}</option>
@@ -59,16 +59,7 @@
 <script>
     export default {
         name: "PedidoComponent",
-        props: {
-            nomeHamburger: {
-                type: String,
-                required: true
-            },
-            fotoHamburger: {
-                type: String,
-                required: true
-            }
-        },
+        props: ["nomeHamburger", "fotoHamburger"],
         data() {
             return {
                 pontoCarneSelecionado: "",
