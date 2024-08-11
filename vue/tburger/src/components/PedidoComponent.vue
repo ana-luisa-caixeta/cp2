@@ -3,42 +3,43 @@
         <form id="pedido-form">
             <div>
                 <p id="nome-hamburguer-content">
-                    {{ nomeHamburger }}
+                    {{ burguer && burguer.nome ? burguer.nome : "-" }}
                 </p>
-                <img id="foto-content" :src="fotoHamburger"/> 
+                <img id="foto-content" :src="burguer && burguer.foto ? burguer.foto : ''"/> 
             </div>
-
-            <div class="inputs">
+            <div class="inputs" id="form-pedido">
                 <label for="nome_cliente">Nome</label>
                 <input type="text"
                        id="nome-cliente"
                        name="nome-cliente"
                        placeholder="Digite seu Nome"/>
             </div>
-
             <div class="inputs">
                 <label for="ponto-carne">Ponto da carne</label>
                 <select
                     id="ponto-carne"
                     name="ponto-carne"
                     v-model="pontoCarneSelecionado">
-                    <option value="" selected>Selecione o ponto</option>]
+                    <option value="" selected>Selecione o ponto</option>
                     <option v-for="pontoCarne in listaPontoCarne" 
                     :key="pontoCarne.id" 
                     :value="pontoCarne">{{ pontoCarne.descricao }}</option>
                 </select>
             </div>
-
             <div id="opcionais-titulo" class="inputs">
                 <label id="opcionais-titulo" for="Opcionais"> Selecione os opcionais</label>
                 <label id="opcionais-subtitulo" for="Complemento">Adicione um complemento</label>
-                <div class="checkbox-container">
-                    <input type="checkbox" name="batata" value="Batata"/>
-                    <span>Batata</span>
-                    <input type="checkbox" name="refri" value="Refri">
-                    <span>Refri</span>
-                </div>
+                
+                <div class="checkbox-container"
+                     v-for="complemento in listaComplementos"
+                     :key="complemento.id">
 
+                     <input type="checkbox" :name="complemento.nome"
+                            v-model="listaComplementosSelecionados"
+                            :value="complemento">
+                     <span>{{ complemento.nome }}</span>       
+                </div>
+                
                 <label for="Complemento">Adicione uma Bebida</label>
                 <div class="checkbox-container">
                     <input type="checkbox" name="coca" value="Coca"/>
@@ -46,9 +47,7 @@
                     <input type="checkbox" name="fanta" value="Fanta">
                     <span>Fanta</span>
                 </div>
-
             </div>
-
             <div class="inputs">
                 <input type="submit" class="submit-btn" value="Confirmar Pedido"/>
             </div>
@@ -59,30 +58,38 @@
 <script>
     export default {
         name: "PedidoComponent",
-        props: ["nomeHamburger", "fotoHamburger"],
         data() {
             return {
                 pontoCarneSelecionado: "",
-                listaPontoCarne : []
+                listaPontoCarne : [],
+                listaComplementos : [],
+                listaBebidas: [],
+                listaComplementosSelecionados: []
             }
+        },
+        props: {
+            burguer: Object
         },
         methods: {
             async getTipoPontos() {
                 const response = await fetch("https://tburguer.wiremockapi.cloud/tipos_pontos");
                 const data = await response.json();
                 this.listaPontoCarne = data;
-                console.log(this.listaPontoCarne);
+            },
+            async getOpcionais() {
+                const response = await fetch("https://tburguer.wiremockapi.cloud/opcionais");
+                const responseJson = await response.json();
+                this.listaComplementos = responseJson.complemento;
+                this.listaBebidas = responseJson.bebidas;
             }
-
             //TODO criar um metodo para preencher o complemento e a bebida.
             //EndPoints: /opcionais 
-
-
         },
         mounted() {
            this.getTipoPontos(); 
+           this.getOpcionais();
+           console.log("Hamburguer recebido:", this.burguer);
             //TODO Vou precisar pegar o Argumento Hamburguer e preencher os campos obrigatórios. 
-
         }
     }
 </script>
@@ -177,7 +184,7 @@ select {
     background-color: #222;
     color: darkgoldenrod;
     font-weight: bold;
-    border: 2px solid #222;
+    border: solid 2px darkgoldenrod;
     border-radius: 8px;
     cursor: pointer;
     padding: 12px;

@@ -10,34 +10,21 @@
                             <p id="nome-content">{{burguer.nome}}</p>
                             <p id="preco-content">R$ {{burguer.valor}},00</p>
                             <p id="descricao-content">{{ burguer.descricao }}</p>
-                            <button @click="hamburgerEscolhido(burguer)">Selecionar</button>
+                            <button @click="selecionarBurguer(burguer)">Selecionar</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <router-link to="/config-pedido">config</router-link>
         </div>
-        <PedidoComponent 
-            v-if="nomeHamburgerEscolhido && fotoHamburgerEscolhido"
-            :nomeHamburger="nomeHamburgerEscolhido" 
-            :fotoHamburger="fotoHamburgerEscolhido" 
-        />
     </div>
 </template>
 
 <script>
-import PedidoComponent from '../components/PedidoComponent.vue';
-
 export default {
-    name: "MenuView",
-    components: {
-        PedidoComponent
-    },
+    name : "MenuView",
     data() {
         return {
-            listaMenuHamburgues: [],
-            nomeHamburgerEscolhido: null,
-            fotoHamburgerEscolhido: null
+            listaMenuHamburgues: []
         };
     },
     methods: {
@@ -46,18 +33,15 @@ export default {
             const dados = await response.json();
             this.listaMenuHamburgues = dados.burgues;
         },
-        /* Desafio
-          - Criar um metodo para navegar para o Pedido componente
-          - Nesse método vai precisar passar o burger selecionar para a o componente PedidoComponent
-        */
-        hamburgerEscolhido(burguer){
-            this.nomeHamburgerEscolhido = burguer.nome;
-            this.fotoHamburgerEscolhido = burguer.foto;
+        selecionarBurguer(burguerSelecionado) {
+            const param = JSON.stringify(burguerSelecionado);
+            const burguerJsonEncode = encodeURIComponent(param);
+            this.$router.push({path: '/config-pedido', query: { burguer : burguerJsonEncode }});
         }
     },
     mounted() {
         this.consultarMenu()
-    },
+    }
 }
 
 </script>

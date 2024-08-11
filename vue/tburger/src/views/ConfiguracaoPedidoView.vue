@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Configurar Pedido</h1>
-        <pedido-component/>
+        <PedidoComponent :burguer="hamburguerSelecionado ? hamburguerSelecionado : {}"/>
     </div>
 </template>
 
@@ -17,7 +17,10 @@
         },
         components: { PedidoComponent },
         mounted() {
-            console.log(this.$router.query.burguer);
+        console.log(this.$route.query);
+        const burguerDecode = decodeURIComponent(this.$route.query.burguer);
+        const burguerJson = JSON.parse(burguerDecode);
+        this.hamburguerSelecionado = burguerJson;
         }
     }
 </script>
