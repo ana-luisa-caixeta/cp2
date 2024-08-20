@@ -5,3 +5,4 @@ function seculo(ano){
 }
 
 console.log(seculo(2024));
+

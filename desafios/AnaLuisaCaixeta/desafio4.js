@@ -15,3 +15,4 @@ function maiorProdutoArray(array){
 
 const array = [3, 6, -2, -5, 7, 3];
 console.log(maiorProdutoArray(array));
+

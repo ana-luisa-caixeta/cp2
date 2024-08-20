@@ -14,3 +14,4 @@ function isPalindromo(palavra) {
 }
 
 console.log(isPalindromo("civic"));
+

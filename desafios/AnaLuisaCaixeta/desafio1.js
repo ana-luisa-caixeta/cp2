@@ -4,3 +4,4 @@ function solucao(parametroUm, parametroDois){
 }
 
 console.log(solucao(10, 20));
+

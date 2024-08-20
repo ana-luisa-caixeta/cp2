@@ -21,3 +21,4 @@ function stringsMaisLongas(array){
 
 const inputArray = ["aba", "aa", "ad", "vcd", "aba"];
 console.log(stringsMaisLongas(inputArray));
+
